@@ -17,7 +17,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $password = hash('sha256', $password);
             if($data['password'] === $password)
             {
-                $_SESSION['user'] = $data['data'];
+                $_SESSION['user'] = $data['username'];
                 header("Location: landing.php");
             }else{header('Location: login.php?login_err=password');}
         }else{header('Location: login.php?email_err=email');}

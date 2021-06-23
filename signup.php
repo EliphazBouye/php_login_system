@@ -1,5 +1,58 @@
 <?php include 'header_login.php'?>
+<?php
+session_start();
+if (isset($_SESSION['user'])){
+    header('Location: landing.php');
+}
+
+?>
+
     <form method="post" action="signup_traitement.php">
+
+        <?php
+
+        if(isset($_GET['signup_err'])){
+            $err = htmlspecialchars($_GET['signup_err']);
+
+            switch ($err){
+                case 'password':
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error</strong> password
+                    </div>
+                    <?php
+                    break;
+                case 'email':
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error</strong> Email
+                    </div>
+                    <?php
+                    break;
+                case 'already':
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error</strong> input is empty
+                    </div>
+                <?php
+                case 'email_length':
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error</strong> Email is too long
+                    </div>
+                <?php
+                case 'username_length':
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error</strong>  username is too long
+                    </div>
+                <?php
+            }
+        }
+
+        ?>
+
+
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
         <div class="form-floating">

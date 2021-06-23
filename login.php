@@ -1,7 +1,44 @@
 <?php include 'header_login.php'?>
+<?php
+session_start();
+if (isset($_SESSION['user'])){
+    header('Location: landing.php');
+}
 
-
+?>
     <form method="post" action="connection.php">
+
+        <?php
+
+            if(isset($_GET['login_err'])){
+                $err = htmlspecialchars($_GET['login_err']);
+
+                switch ($err){
+                    case 'password':
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error</strong> password
+                        </div>
+                    <?php
+                        break;
+                    case 'email':
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error</strong> Email
+                        </div>
+                    <?php
+                        break;
+                    case 'already':
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error</strong> input is empty
+                        </div>
+                    <?php
+                }
+            }
+
+        ?>
+
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
